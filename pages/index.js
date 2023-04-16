@@ -10,7 +10,7 @@ export default function Home({ posts }) {
   return (
     <div>
       <Head>
-        <title>Notion Next.js blog</title>
+        <title>Tack's Blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -47,9 +47,9 @@ export default function Home({ posts }) {
               </g>
             </svg>
           </div>
-          <h1>Next.js + Notion API ブログ</h1>
+          <h1>たっくさんBlog</h1>
           <p>
-           Notionと連携しているブログです。Notionに書き込めばそのままブログとして投稿できます。
+           つれづれなるままにひぐらし、、、ICTについて
           </p>
         </header>
 
@@ -87,5 +87,15 @@ export default function Home({ posts }) {
   );
 }
 
-//SSGを追加
+//ISRを追加
+export const getStaticProps = async () => {
+  const database = await getDatabase(databaseId);
 
+  return{
+    props: {
+      posts: database,
+    },
+    revalidate: 60,
+  };
+
+};
